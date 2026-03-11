@@ -4,9 +4,7 @@ using namespace std;
 
 int main(int argc,const char *argv[])
 {
-    // cout << "Inserisci il nome del file da leggere: \n";
     string nomefile = argv[1];
-    // cin >> nomefile;
     ifstream file(nomefile);
     if (file.is_open())
     {
