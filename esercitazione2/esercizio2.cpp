@@ -25,5 +25,30 @@ int main()
     deviazione = std::sqrt(deviazione/N);
     
     std::cout<<"Minimo: "<< minimo << "\nMassimo: "<<massimo<< "\nMedia: " <<media<< "\nDeviazione Standard: "<< deviazione <<"\n";
+    
+    // implemento bubblesort
+    double primo = a[0];
+    int flag = 0;
+    while(!flag)
+    {
+        flag = 1;
+        for(int i=0; i<N-1;i++)
+        {
+            if(a[i]>a[i+1])
+            {
+                primo = a[i+1];
+                a[i+1] = a[i];
+                a[i] = primo;
+                flag = 0;
+            }
+        }
+    }
+
+    for(int i =0;i<N;i++)
+    {
+        std::cout << a[i] << " ";
+    }
+    std::cout << "\n";
+
     return 0;
 }
