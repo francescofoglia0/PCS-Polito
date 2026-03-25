@@ -13,7 +13,6 @@ class rational
         }
 
         rational(const I& pnum, const I& pden){
-            if(pnum)
             num = pnum; den = pden;
             semplifica();
         }
