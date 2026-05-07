@@ -89,9 +89,10 @@ class unidirected_graph
 
         set<T> neighours(const T& nodo) const
         {
-            //controllo se nodo è nelle chiavi e nel caso lo restituisco (O(logN))
-            if(nadiacenti.contains(nodo))
-            return nadiacenti.at(nodo);
+            auto it = nadiacenti.find(nodo);
+            //controllo se l'iteratore è diverso da end, in quel caso la chiave esiste
+            if(it != nadiacenti.end())
+                return it->second; //restituisco il valore trovato dall'iteratore
             else return set<T>();
         }
                      //passo sempre per riferimento ma come const cosi non posso modificare involontariamente
@@ -116,9 +117,9 @@ class unidirected_graph
         set<T> all_nodes() const {return nodi;}
 
         int edge_number(const unidirected_edge<T>& arco) const
-        {//controllo se l'arco è contenuto nel grafo (chiave di ednum) e nel caso ritorno la sua
+        {//controllo se l'arco è presente nella mappa (grafo) e nel caso ritorno la sua
          // numerazione, altrimenti -1
-            if(ednum.contains(arco)) return ednum.at(arco);
+            if(ednum.find(arco) != ednum.end()) return ednum.at(arco);
             else return -1;
         }
         unidirected_edge<T> edge_at(int num) const
@@ -131,11 +132,12 @@ class unidirected_graph
             unidirected_graph<T> risultato;
             int n = archi.size();
             for(int i=0; i<n; i++)
-            {//controllo se archi di other non contiene l'arco di this, in quel caso aggiungo
+            {//controllo se il set archi di other non contiene l'arco di this, in quel caso aggiungo
              // quell'arco in risultato
-                if(!other.archi.contains(edat.at(i)))
+                unidirected_edge<T> corrente = edat.at(i);
+                if(other.archi.find(corrente) == other.archi.end())
                 {
-                   risultato.add_edge(edat.at(i));
+                   risultato.add_edge(corrente);
                 }
             }
             return risultato;
