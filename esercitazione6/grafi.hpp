@@ -72,19 +72,13 @@ class unidirected_graph
         set<unidirected_edge<T>> archi; //per alledges(), set(archi)
         set<T> nodi;    //per allnodes(), set(nodi)
         map<T,set<T>> nadiacenti; //per neighours(), chiave è nodo
-        map<unidirected_edge<T>,int>  ednum;//per edge_number(), uso map perche vengono ordinati con < (creata su)
-        unordered_map<int,unidirected_edge<T>> edat; //per edgeat(), per la ricerca ha O(1)
-        int contatore = 0;
-    public:
+        public:
         unidirected_graph()=default;
         unidirected_graph(const unidirected_graph& other)
         {
             archi = other.archi;
             nodi = other.nodi;
             nadiacenti = other.nadiacenti;
-            ednum = other.ednum;
-            edat = other.edat;
-            contatore = other.contatore;
         }
 
         set<T> neighours(const T& nodo) const
@@ -107,34 +101,62 @@ class unidirected_graph
                 nodi.insert(newarc.to());
                 nadiacenti[newarc.from()].insert(newarc.to());
                 nadiacenti[newarc.to()].insert(newarc.from());
-                ednum[newarc] = contatore;
-                edat.insert({contatore,newarc});
-                contatore++;
+                // ednum[newarc] = contatore;
+                // edat.insert({contatore,newarc});
             }
         }
 
         set<unidirected_edge<T>> all_edges() const {return archi;}
         set<T> all_nodes() const {return nodi;}
 
-        int edge_number(const unidirected_edge<T>& arco) const
-        {//controllo se l'arco è presente nella mappa (grafo) e nel caso ritorno la sua
-         // numerazione, altrimenti -1
-            if(ednum.find(arco) != ednum.end()) return ednum.at(arco);
-            else return -1;
+        int edge_number(const unidirected_edge<T>& arco) const 
+        {
+            //Verifico se l'arco esiste 
+            auto target = archi.find(arco);
+        
+            if (target == archi.end()) {
+                return -1; // L'arco non c'è
+            }
+
+            //il set è ora ordinato, conto i passi dall'inizio fino al target
+            int indice = 0;
+            for (auto it = archi.begin(); it != target; ++it) {
+                indice++;// Uso ++it (pre-incremento) per evitare copie inutili dell'iteratore
+            }
+            
+            return indice;
         }
-        unidirected_edge<T> edge_at(int num) const
-        {//se non trova num lancia in automatico errore
-            return edat.at(num);
+
+       // Cambio int in size_t così che l'indice non può mai essere negativo e lo confronto con sizet
+        unidirected_edge<T> edge_at(size_t num) const 
+        {
+            // confrontiamo size_t con size_t, niente errori!
+            if (num >= archi.size()) 
+            {
+                std::cerr << "Errore: Indice dell'arco non valido" << std::endl;
+                return unidirected_edge<T>(); 
+            }
+
+            auto it = archi.begin();
+            
+            // anche il contatore del for diventa size_t per coerenza
+            for (size_t i = 0; i < num; i++) 
+            {
+                ++it; 
+            }
+            
+            return *it; 
         }
+
 
         unidirected_graph<T> operator-(const unidirected_graph<T>& other) const
         {
             unidirected_graph<T> risultato;
-            int n = archi.size();
-            for(int i=0; i<n; i++)
-            {//controllo se il set archi di other non contiene l'arco di this, in quel caso aggiungo
-             // quell'arco in risultato
-                unidirected_edge<T> corrente = edat.at(i);
+            
+            // Scorriamo direttamente tutti gli archi di questo grafo
+            for(const auto& corrente : archi)
+            {
+                // Se l'arco 'corrente' NON è presente nell'altro grafo, lo aggiungo
                 if(other.archi.find(corrente) == other.archi.end())
                 {
                    risultato.add_edge(corrente);
@@ -151,12 +173,16 @@ template<typename T>
 std::ostream&
 operator<<(std::ostream& os, const unidirected_graph<T>& g)
 {
-    int n = g.all_edges().size();
-    os<<"{";
-    for(int i = 0; i<n;i++)
+    auto tutti_gli_archi = g.all_edges();
+    size_t n = tutti_gli_archi.size();
+    size_t i = 0; // Uso size_t invece di int per fare confronti con n
+    
+    os << "{";
+    for(const auto& arco : tutti_gli_archi)
     {
-        os << g.edge_at(i);
-        if(i!=n-1) os << ", "; //evito di stampare la virgola dopo l'ultimo arco
+        os << arco;
+        if(i != n - 1) os << ", "; // evito di stampare la virgola dopo l'ultimo arco
+        i++;
     }
     os << "}\n";
     return os;

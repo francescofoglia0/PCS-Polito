@@ -45,7 +45,7 @@ int main()
     cout << "Cerco la numerazione corrispondente all'arco (60,2): " << endl;
     if(id != -1) {
         cout << "Numero trovato: " << id << endl;
-        cout << "Verifica inversa: l'arco al numero:  " << id << " e' " << g1.edge_at(id) << endl;
+        cout << "Verifica inversa: l'arco all'indice:  " << id << " e' " << g1.edge_at(id) << endl;
     } else {
         cout << "Errore: arco non trovato!" << endl;
     }
