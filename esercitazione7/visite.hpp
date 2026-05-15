@@ -49,47 +49,62 @@ unidirected_graph<T> graph_visit(const unidirected_graph<T>& G,const T& sorg,C& 
 template<typename T>
 void dfs_fake(const unidirected_graph<T>& G, const T& nodo, std::set<T>& reached, unidirected_graph<T>& risultato)
 {
-    auto vicini = G.neighours(nodo);
-    //copio in un vettore(scorro con indici) il set vicini del nodo attraverso costruttore di intervallo:
-    //prende un set,lista,mappa.. e copia in un vettore tutto cio tra l'inzio e la fine della struttura dati
-    std::vector<T> vicini_vec(vicini.begin(), vicini.end());
-    
-    //Inserisco in questa fase gia tutti i vicini visitati in modo che non vengano "rubati" da nodi
-    //più profodni
-
-    //segno chi devo visitare
-    std::vector<T> da_visitare; 
-
-    // Scorro i vicini al contrario (simulo ordine della pila LIFO)
-    for (int i = vicini_vec.size() - 1; i >= 0; --i) 
+    // Scorro i vicini nell'ordine fornito dal set dei vicini di nodo
+    for (const auto& vicino : G.neighours(nodo))
     {
-        T vicino = vicini_vec[i];
-        
-        // Se il vicino non è ancora stato visitato da nessuno
-        if (reached.find(vicino) == reached.end()) 
+        // Se il vicino non è stato visitato, lo visito subito
+        if (reached.find(vicino) == reached.end())
         {
-            reached.insert(vicino); 
+            reached.insert(vicino);           // Lo segno come raggiunto
+            risultato.add_edge({nodo, vicino});  // Aggiungo l'arco all'albero
             
-            // lo visito e creo un arco con il suo nodo sorgente
-            risultato.add_edge({nodo, vicino}); 
-            
-            //lo segno per andare in profondità successivamente
-            da_visitare.push_back(vicino); 
+        //Ricorsione: vado in profondità su questo ramo prima di guardare il prossimo vicino di nodo
+            dfs_fake(G, vicino, reached, risultato);
         }
     }
+    // avevo implementato qua giu la dfs in modo che desse lo stesso risultato di quella iterativa
 
-    // Ora che ho scopert i vicini da visitare e tracciato gli archi, scendo in profondità!
-    for (const T& v : da_visitare)
-    {
-        dfs_fake(G, v, reached, risultato);
-    }
+    // auto vicini = G.neighours(nodo);
+    // //copio in un vettore(scorro con indici) il set vicini del nodo attraverso costruttore di intervallo:
+    // //prende un set,lista,mappa.. e copia in un vettore tutto cio tra l'inzio e la fine della struttura dati
+    // std::vector<T> vicini_vec(vicini.begin(), vicini.end());
+    
+    // //Inserisco in questa fase gia tutti i vicini visitati in modo che non vengano "rubati" da nodi
+    // //più profodni
+
+    // //segno chi devo visitare
+    // std::vector<T> da_visitare; 
+
+    // // Scorro i vicini al contrario (simulo ordine della pila LIFO)
+    // for (int i = vicini_vec.size() - 1; i >= 0; --i) 
+    // {
+    //     T vicino = vicini_vec[i];
+        
+    //     // Se il vicino non è ancora stato visitato da nessuno
+    //     if (reached.find(vicino) == reached.end()) 
+    //     {
+    //         reached.insert(vicino); 
+            
+    //         // lo visito e creo un arco con il suo nodo sorgente
+    //         risultato.add_edge({nodo, vicino}); 
+            
+    //         //lo segno per andare in profondità successivamente
+    //         da_visitare.push_back(vicino); 
+    //     }
+    // }
+
+    // // Ora che ho scopert i vicini da visitare e tracciato gli archi, scendo in profondità!
+    // for (const T& v : da_visitare)
+    // {
+    //     dfs_fake(G, v, reached, risultato);
+    // }
 }
 
 template<typename T>
 unidirected_graph<T> recursive_dfs(const unidirected_graph<T>& G, const T& nodos)
 {
     unidirected_graph<T> alberoris;
-    set<T> reached;
+    std::set<T> reached;
     //verifico che nodo sorgente esista
     auto nodi = G.all_nodes();
     if(nodi.find(nodos) != nodi.end())
@@ -100,13 +115,7 @@ unidirected_graph<T> recursive_dfs(const unidirected_graph<T>& G, const T& nodos
     return alberoris;
 }
 
-
-//per implementare dijkstra posso fare cosi, inserisco in qualche modo i pesi nella classe grafi.hpp,
-//ad esempio creo una mappa che ha come chiave gli archi e come valore il peso
-//e quindi anche add_peso(), successivamente per usare una coda con priorita posso semplicemente
-//un arco della classe grafi.hpp in cui inverto la struttura: invece di (w,pred(w)), uso (pred(w),w)
-
-
+                                //se non specificato usa double
 template<typename T,typename P = double>
 unidirected_graph<T,P> dijkstra(const unidirected_graph<T,P>& G, const T& sorgente)
 {
@@ -130,8 +139,8 @@ unidirected_graph<T,P> dijkstra(const unidirected_graph<T,P>& G, const T& sorgen
         // Se il tipo P NON lo supporta (int)
         infinito = std::numeric_limits<P>::max(); // Prendi il numero più grande possibile
     }
-    map<T,P> dist;
-    map<T,T> pred;
+    std::map<T,P> dist;
+    std::map<T,T> pred;
 
     //inizializzo il "vettore" delle distanze dello pseudocodice
     for (const auto& nodo : G.all_nodes()) {

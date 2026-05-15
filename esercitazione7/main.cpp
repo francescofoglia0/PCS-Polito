@@ -21,7 +21,7 @@ int main() {
     // G.add_edge({2, 5});
     // G.add_edge({3, 6});
     // G.add_edge({5, 6}); // Questo arco crea un ciclo
-
+    cout << "1.Implemento BFS, DFS, DFS Ricorsiva per il seguente grafo:\n" <<G <<endl;
     // Visita in ampiezza (BFS)
     fifo<int> coda;
     unidirected_graph<int> albero_bfs = graph_visit(G, 1, coda);
@@ -57,12 +57,12 @@ int main() {
     G1.add_peso({3, 4}, 7.0);
 
     // Stampa del grafo di partenza usando operator<< 
-    cout << "GRAFO ORIGINALE:" << endl;
+    cout << "\n2.Implemento Dijkstra sul grafo:" << endl;
     cout << G1<<endl;
 
     // eseguo dijkstra
     int sorgente = 1;
-    cout << "\nEseguo Dijkstra partendo dal nodo sorgente: " << sorgente << endl;
+    cout << "Eseguo Dijkstra partendo dal nodo sorgente: " << sorgente << endl;
     
     unidirected_graph<int, double> albero_minimi = dijkstra(G1, sorgente);
 
@@ -71,7 +71,7 @@ int main() {
     cout << albero_minimi<<endl;
 
     // Ispeziono i pesi degli archi scelti per essere sicuro
-    cout << "\nDettagli dei pesi degli archi scelti dall'algoritmo:" << endl;
+    cout << "Dettagli dei pesi degli archi scelti dall'algoritmo:" << endl;
     for (const auto& arco : albero_minimi.all_edges()) {
         cout << "Arco dell'albero " << arco << " -> Peso minimo: " << albero_minimi.get_peso(arco) << endl;
     }
@@ -111,22 +111,24 @@ int main() {
     G2.add_edge({"Cagliari", "Sassari"});
     G2.add_peso({"Cagliari", "Sassari"}, 5.0);
 
+    
+    cout << "\n3.Implemento Dijkstra su un grafo formato da stringhe:\n"<<G2<< endl; 
+    // Eseguiamo Dijkstra partendo da Torino
+    string partenza = "Torino";
+    cout << "Esecuzione di Dijkstra da: " << partenza <<"\n"<< endl;
+    
+    unidirected_graph<string, double> albero_minimi_string = dijkstra(G2, partenza);
+
     // Salva il grafo di partenza completo
     salva_grafo_dot(G2, "mappa_italia_completa.dot");
 
-    // Eseguiamo Dijkstra partendo da Torino
-    string partenza = "Torino";
-    cout << "\nEsecuzione di Dijkstra da: " << partenza <<"\n"<< endl;
-    
-    unidirected_graph<string, double> albero_minimi2 = dijkstra(G2, partenza);
-
     // Salva l'albero finale ottenuto
-    salva_grafo_dot(albero_minimi2, "albero_cammini_minimi.dot");
+    salva_grafo_dot(albero_minimi_string, "albero_cammini_minimi.dot");
 
     // Stampiamo a schermo il dettaglio dei percorsi ottimali scelti
     cout << "\nVerifica archi minime con stringhe" << endl;
-    for (const auto& arco : albero_minimi.all_edges()) {
-        cout << "Cammino Minimo include: " << arco << " con peso: " << albero_minimi.get_peso(arco) << endl;
+    for (const auto& arco : albero_minimi_string.all_edges()) {
+        cout << "Cammino Minimo include: " << arco << " con peso: " << albero_minimi_string.get_peso(arco) << endl;
     }
     cout << "Per maggiori info printare su graphviz"<<endl;
 
