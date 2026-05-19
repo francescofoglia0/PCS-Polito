@@ -3,7 +3,6 @@
 #include "lifofifo.hpp"
 #include <set>
 #include <map>
-#include <utility> // Per std::pair
 #include <limits> //per infinito
 
 
