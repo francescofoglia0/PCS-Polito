@@ -6,6 +6,7 @@
 #include "lifofifo.hpp"
 #include "algoritmi_circuiti.hpp"
 #include "sistemi_lineari.hpp"
+#include <chrono>
 
 using namespace std;
 
@@ -31,7 +32,7 @@ int main(int argc, const char *argv[])
         return 1;
     }
 
-    // gestiamo il caso in cui è presente un nodo foglia in un circuito, ovvero un circuito è aperto
+    //gestiamo il caso in cui è presente un nodo foglia in un circuito, ovvero un circuito è aperto
     bool anomalie_topologiche = false;
     
     // un circuito chiuso deve avere tutti i nodi con almeno 2 connessioni.
@@ -51,19 +52,20 @@ int main(int argc, const char *argv[])
         return 1;
     }
 
-    // gestiamo qui il caso di grafo disconesso, i.e di piu componenti connesse nel grafo
+    //gestiamo qui il caso di grafo disconesso, i.e di piu componenti connesse nel grafo
     unidirected_graph<int,double> T; // Inizializziamo un grafo vuoto
     std::set<int> nodi_visitati; //qui salviamo tutti i nodi che visitiamo man mano
 
-    // prendo ogni nodo del circuito per salvare tutte le componenti connesse
+    // Prendo ogni nodo del circuito per salvare tutte le componenti connesse
     for(int nodo : circuito.all_nodes())
     {
-        // se troviamo un nodo non ancora coperto da un albero precedente
+        // Se troviamo un nodo non ancora coperto da un albero precedente
         if(nodi_visitati.find(nodo) == nodi_visitati.end())
         {
             // facciamo partire una nuova dfs per questa specifica sottorete
             lifo<int> pila_locale;
             unidirected_graph<int,double> albero = graph_visit(circuito, nodo, pila_locale);
+        
             // Uniamo gli archi e i nodi di questa componente al grafo T
             for(const auto& arco : albero.all_edges()) {
                 T.add_edge(arco);
@@ -76,17 +78,86 @@ int main(int argc, const char *argv[])
     // il coalbero conterrà ora solo le vere corde (archi rimanenti) di tutti i sottocicli
     unidirected_graph<int,double> coalbero = circuito - T;
 
-    // DFS
-    // eseguo l'algoritmo puro
-    vector<vector<int>> cicli_dfs = dfs_cicli(circuito, T, coalbero);
+    //DFS
+    // Faccio partire il cronometro
+    auto start_dfs = chrono::high_resolution_clock::now();
 
-    // scegliamo di risolvere il circuito usando i cicli dfs (piu veloce)
+    // Eseguo l'algoritmo puro
+    vector<vector<int>> cicli_dfs = dfs_cicli(circuito, T, coalbero);
+    
+    // Fermo il cronometro
+    auto end_dfs = chrono::high_resolution_clock::now();
+    
+    // Calcolo la durata in millisecondi
+    chrono::duration<double, milli> durata_dfs = end_dfs - start_dfs;
+    cout << "\nTempo di esecuzione DFS: " << durata_dfs.count() << " ms\n";
+    for (size_t i = 0; i < cicli_dfs.size(); ++i) 
+    {
+        cout << "Maglia DFS " << i + 1 << ": ";
+        const auto& C = cicli_dfs[i];
+        for (size_t j = 0; j < C.size() - 1; ++j) 
+        {
+            cout << C[j] << " -> ";
+        }
+        cout << C.back() << "\n";
+    }
+
+
+    // DEPINA
+    
+    auto start_depina = chrono::high_resolution_clock::now();
+    
+    vector<vector<int>> cicli_depina = de_pina(circuito, T, coalbero);
+    
+    auto end_depina = chrono::high_resolution_clock::now();
+    
+    chrono::duration<double, milli> durata_depina = end_depina - start_depina;
+    cout << "\nTempo di esecuzione De Pina: " << durata_depina.count() << " ms\n";
+    for (size_t i = 0; i < cicli_depina.size(); ++i) 
+    {
+        cout << "Ciclo Minimo " << i + 1 << ": ";
+        const auto& C = cicli_depina[i];
+        unidirected_graph<int, double> grafo_ciclo;
+        
+        for (size_t j = 0; j < C.size() - 1; ++j) 
+        {
+            cout << C[j] << " -> ";
+            grafo_ciclo.add_edge({C[j], C[j+1]});
+        }
+        cout << C.back() << "\n";
+    }
+
+
+    // Scegliamo di risolvere il circuito usando i cicli ottimali di De Pina
     auto [B, R, v] = creazione_B_R(circuito, cicli_dfs);
 
+    cout << "\nMatrice di Incidenza Maglie (B):\n" << B << "\n\n";
+    cout << "Matrice delle Resistenze (R):\n" << R << "\n\n";
+    cout << "Vettore dei Generatori (V):\n" << v << "\n\n";
 
-    // soluzione del circuito solo con dfs (risultato uguale a de pina, ma piu veloce)
+
+    // Soluzione del circuito
+    
+    auto [I_rami, V_rami] = calcola_output(circuito, cicli_depina);
+    cout << "Risultati considerando i cicli generati dall'algoritmo di de pina:\n";
+    for(int i = 0; i < V_rami.size(); ++i)
+    {
+        double tensione = V_rami(i);
+        double corrente = I_rami(i);
+        
+        // Ricostruiamo il nome interno che il parser ha assegnato (R1, R2...)
+        string nome_interno = "R" + to_string(i + 1);
+        
+        // Traduciamo il nome interno nel nome originale della Netlist (es. R50)
+        string nome_reale = mappa_nomi[nome_interno];
+        
+        cout << nome_reale << ": V = " << tensione << " volts, I = " << corrente << " amps\n";
+    }
+    cout<<"\n\n";
+
+    //risolvo anche con i cicli dfs per vedere se cambia
     auto [i_maglie1, V_rami1] = calcola_output(circuito, cicli_dfs);
-    cout <<"\n";
+    cout << "Risultati considerando i cicli generati dall'algoritmo dfs:\n";
     for(int i = 0; i < V_rami1.size(); ++i)
     {
         // double tensione = round(V_rami1(i) * 1000.0) / 1000.0;
@@ -102,6 +173,6 @@ int main(int argc, const char *argv[])
         
         cout << nome_reale1 << ": V = " << tensione << " volts, I = " << corrente << " amps.\n";
     }
-    cout << "\n";
+
     return 0;
 }
