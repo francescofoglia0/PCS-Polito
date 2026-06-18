@@ -1,0 +1,23 @@
+Start testing: May 12 21:11 UTC
+----------------------------------------------------------
+1/1 Testing: grafitest
+1/1 Test: grafitest
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione6.1/Buildes6/test_grafi"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione6.1/Buildes6
+"grafitest" start time: May 12 21:11 UTC
+Output:
+----------------------------------------------------------
+Test inserimento: OK
+Test Mapping ID: OK
+Test Vicini: OK
+Test Sottrazione (-): OK
+Tutti i test PASSATI
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"grafitest" end time: May 12 21:11 UTC
+"grafitest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 12 21:11 UTC

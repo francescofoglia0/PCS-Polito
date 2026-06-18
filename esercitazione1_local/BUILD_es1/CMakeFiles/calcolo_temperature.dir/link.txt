@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wl,--dependency-file=CMakeFiles/calcolo_temperature.dir/link.d CMakeFiles/calcolo_temperature.dir/esercizio1.cpp.o -o calcolo_temperature

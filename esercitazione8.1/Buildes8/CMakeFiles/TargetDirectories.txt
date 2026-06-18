@@ -1,0 +1,4 @@
+/home/pcsdocker/Data/PCS-Polito/esercitazione8.1/Buildes8/CMakeFiles/gcd.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione8.1/Buildes8/CMakeFiles/test.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione8.1/Buildes8/CMakeFiles/edit_cache.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione8.1/Buildes8/CMakeFiles/rebuild_cache.dir

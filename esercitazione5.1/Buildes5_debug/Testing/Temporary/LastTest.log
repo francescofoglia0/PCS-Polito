@@ -1,0 +1,83 @@
+Start testing: Apr 23 17:25 UTC
+----------------------------------------------------------
+1/5 Testing: bubblesort
+1/5 Test: bubblesort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug/test_bubblesort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug
+"bubblesort" start time: Apr 23 17:25 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   9.40 sec
+----------------------------------------------------------
+Test Passed.
+"bubblesort" end time: Apr 23 17:25 UTC
+"bubblesort" time elapsed: 00:00:09
+----------------------------------------------------------
+
+2/5 Testing: insertionsort
+2/5 Test: insertionsort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug/test_insertionsort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug
+"insertionsort" start time: Apr 23 17:25 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   2.74 sec
+----------------------------------------------------------
+Test Passed.
+"insertionsort" end time: Apr 23 17:25 UTC
+"insertionsort" time elapsed: 00:00:02
+----------------------------------------------------------
+
+3/5 Testing: selectionsort
+3/5 Test: selectionsort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug/test_selectionsort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug
+"selectionsort" start time: Apr 23 17:25 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   4.40 sec
+----------------------------------------------------------
+Test Passed.
+"selectionsort" end time: Apr 23 17:26 UTC
+"selectionsort" time elapsed: 00:00:04
+----------------------------------------------------------
+
+4/5 Testing: mergesort
+4/5 Test: mergesort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug/test_mergesort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug
+"mergesort" start time: Apr 23 17:26 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   0.21 sec
+----------------------------------------------------------
+Test Passed.
+"mergesort" end time: Apr 23 17:26 UTC
+"mergesort" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/5 Testing: quicksort
+5/5 Test: quicksort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug/test_quicksort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione5.1/Buildes5_debug
+"quicksort" start time: Apr 23 17:26 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"quicksort" end time: Apr 23 17:26 UTC
+"quicksort" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Apr 23 17:26 UTC

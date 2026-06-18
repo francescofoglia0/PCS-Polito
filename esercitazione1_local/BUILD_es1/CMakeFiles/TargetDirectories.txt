@@ -1,0 +1,4 @@
+/home/pcsdocker/Data/PCS-Polito/esercitazione1_local/BUILD_es1/CMakeFiles/esercizio_prova.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione1_local/BUILD_es1/CMakeFiles/calcolo_temperature.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione1_local/BUILD_es1/CMakeFiles/edit_cache.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione1_local/BUILD_es1/CMakeFiles/rebuild_cache.dir

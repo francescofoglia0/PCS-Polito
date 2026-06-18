@@ -1,0 +1,13 @@
+graph G {
+    node [shape=circle];
+    "Bologna" -- "Genova" [label="1"];
+    "Bologna" -- "Milano" [label="6"];
+    "Bologna" -- "Roma" [label="10"];
+    "Bologna" -- "Venezia" [label="2"];
+    "Cagliari" -- "Sassari" [label="5"];
+    "Genova" -- "Milano" [label="3"];
+    "Genova" -- "Torino" [label="7"];
+    "Milano" -- "Torino" [label="2"];
+    "Milano" -- "Venezia" [label="11"];
+    "Roma" -- "Venezia" [label="4"];
+}

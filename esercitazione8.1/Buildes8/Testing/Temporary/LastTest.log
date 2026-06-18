@@ -1,0 +1,28 @@
+Start testing: May 20 13:03 UTC
+----------------------------------------------------------
+1/1 Testing: gctest
+1/1 Test: gctest
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione8.1/Buildes8/gcd"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione8.1/Buildes8
+"gctest" start time: May 20 13:03 UTC
+Output:
+----------------------------------------------------------
+Test 3x3 SPD: OK
+
+Test 10x10 Tridiagonale: OK
+
+Raggiunto il numero massimo di iterazioni (30) senza convergenza completa.
+Test matrice non-SPD: OK
+
+Test Soluzione Nota (Ones): OK
+
+Tutti i test PASSATI
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"gctest" end time: May 20 13:03 UTC
+"gctest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 20 13:03 UTC

@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wshadow -Werror=vla -Wl,--dependency-file=CMakeFiles/gcd.dir/link.d CMakeFiles/gcd.dir/main.cpp.o -o gcd

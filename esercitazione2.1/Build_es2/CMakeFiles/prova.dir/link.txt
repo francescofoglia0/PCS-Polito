@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wshadow -Werror=vla -Wl,--dependency-file=CMakeFiles/prova.dir/link.d CMakeFiles/prova.dir/printadd.cpp.o -o prova

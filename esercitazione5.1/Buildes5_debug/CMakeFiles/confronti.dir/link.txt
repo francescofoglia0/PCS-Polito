@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wshadow -Werror=vla -g -Wl,--dependency-file=CMakeFiles/confronti.dir/link.d CMakeFiles/confronti.dir/timecounter.cpp.o CMakeFiles/confronti.dir/confronta.cpp.o -o confronti

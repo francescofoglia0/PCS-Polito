@@ -1,0 +1,4 @@
+/home/pcsdocker/Data/PCS-Polito/esercitazione2.1/Build_es2/CMakeFiles/prova.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione2.1/Build_es2/CMakeFiles/es2.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione2.1/Build_es2/CMakeFiles/edit_cache.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione2.1/Build_es2/CMakeFiles/rebuild_cache.dir

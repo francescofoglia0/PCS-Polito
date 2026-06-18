@@ -1,0 +1,51 @@
+Start testing: Apr 02 14:57 UTC
+----------------------------------------------------------
+1/3 Testing: bubblesort
+1/3 Test: bubblesort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/test_bubblesort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4
+"bubblesort" start time: Apr 02 14:57 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   8.41 sec
+----------------------------------------------------------
+Test Passed.
+"bubblesort" end time: Apr 02 14:57 UTC
+"bubblesort" time elapsed: 00:00:08
+----------------------------------------------------------
+
+2/3 Testing: insertionsort
+2/3 Test: insertionsort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/test_insertionsort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4
+"insertionsort" start time: Apr 02 14:57 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   2.85 sec
+----------------------------------------------------------
+Test Passed.
+"insertionsort" end time: Apr 02 14:57 UTC
+"insertionsort" time elapsed: 00:00:02
+----------------------------------------------------------
+
+3/3 Testing: selectionsort
+3/3 Test: selectionsort
+Command: "/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/test_selectionsort"
+Directory: /home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4
+"selectionsort" start time: Apr 02 14:57 UTC
+Output:
+----------------------------------------------------------
+Tutto giusto
+<end of output>
+Test time =   4.63 sec
+----------------------------------------------------------
+Test Passed.
+"selectionsort" end time: Apr 02 14:58 UTC
+"selectionsort" time elapsed: 00:00:04
+----------------------------------------------------------
+
+End testing: Apr 02 14:58 UTC

@@ -1,0 +1,7 @@
+/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/CMakeFiles/confronti.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/CMakeFiles/test_bubblesort.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/CMakeFiles/test_insertionsort.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/CMakeFiles/test_selectionsort.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/CMakeFiles/test.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/CMakeFiles/edit_cache.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione4.1/Build_es4/CMakeFiles/rebuild_cache.dir

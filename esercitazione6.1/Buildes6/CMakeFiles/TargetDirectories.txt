@@ -1,0 +1,5 @@
+/home/pcsdocker/Data/PCS-Polito/esercitazione6.1/Buildes6/CMakeFiles/grafi.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione6.1/Buildes6/CMakeFiles/test_grafi.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione6.1/Buildes6/CMakeFiles/test.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione6.1/Buildes6/CMakeFiles/edit_cache.dir
+/home/pcsdocker/Data/PCS-Polito/esercitazione6.1/Buildes6/CMakeFiles/rebuild_cache.dir
