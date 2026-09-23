@@ -27,3 +27,59 @@ Il progetto utilizza CMake come sistema di build. Segui questi step per compilar
    ```bash
    git clone [https://github.com/tuo-username/circuit-solver.git](https://github.com/tuo-username/circuit-solver.git)
    cd circuit-solver
+   ```
+
+2. Crea una directory di build ed esegui CMake:
+   ```bash
+   mkdir build
+   cd build
+   cmake ..
+   ```
+   *(Nota: AddressSanitizer è abilitato di default. Per disabilitarlo per test di performance pure, usa `cmake .. -DENABLE_ASAN=OFF`)*
+
+3. Compila il progetto:
+   ```bash
+   make
+   ```
+
+4. Esegui il simulatore:
+   ```bash
+   ./circuit_sim
+   ```
+
+## Esempio di Utilizzo (API)
+
+L'interfaccia utente è progettata per essere intuitiva. Ecco come definire un circuito e calcolare le tensioni nodali:
+
+```cpp
+#include "Circuit.hpp"
+
+int main() {
+    // 1. Inizializza un circuito con 2 nodi (il nodo 0 è sempre la massa/GND)
+    Circuit myCircuit(2);
+
+    // 2. Costruisci la topologia
+    myCircuit.addResistor(1, 0, 10.0); // Resistor da 10Ω tra Nodo 1 e GND
+    myCircuit.addResistor(1, 2, 5.0);  // Resistor da 5Ω tra Nodo 1 e Nodo 2
+    myCircuit.addResistor(2, 0, 20.0); // Resistor da 20Ω tra Nodo 2 e GND
+
+    // 3. Inserisci i generatori
+    myCircuit.addCurrentSource(1, 2.0); // Generatore di corrente da 2A nel Nodo 1
+
+    // 4. Risolvi il sistema
+    Eigen::VectorXd node_voltages = myCircuit.solve();
+    
+    return 0;
+}
+```
+
+## Struttura del Progetto
+
+*   `CMakeLists.txt`: Configurazione del sistema di build, linking di Eigen3 e flag di compilazione.
+*   `Circuit.hpp`: Strutture dati Object-Oriented (`Component`, `Resistor`, `Circuit`) e logica di assemblaggio della matrice MNA.
+*   `Solver.hpp`: Namespace matematico contenente l'algoritmo del Gradiente Coniugato.
+*   `main.cpp`: Entry point dell'applicazione, setup della topologia di test e stampa dei risultati.
+
+## Contesto Accademico
+
+Progetto sviluppato come applicazione pratica dei concetti di ingegneria del software e calcolo scientifico (Politecnico di Torino). Le aree di focus includono: principi SOLID in C++, smart pointers, complessità computazionale degli algoritmi iterativi e High Performance Computing (HPC).
